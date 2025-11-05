@@ -25,6 +25,7 @@
 
 ## 🔥 Updates
 
+* [Nov 2025] We release the trajectories we collected with ZedX Stereo camera on ICRA 2025 conference. See the *Additional Trajectory Release* in README for more details.
 * [Jun 2025] We release the **MAC-VO Fast Mode** - with faster pose graph optimization and mixed-precision inference, we achieve 2x speedup compared to previous version and reach speed of 12.5fps on 480x640 images. 
 
   See `Config/Experiment/MACVO/MACVO_Fast.yaml` for detail. 
@@ -222,15 +223,6 @@ Expand All (2 commands)
 </details>
 
 
-## 📐 Coordinate System in this Project
-
-**PyTorch Tensor Data** - All images are stored in `BxCxHxW` format following the convention. Batch dimension is always the first dimension of tensor.
-
-**Pixels on Camera Plane** - All pixel coordinates are stored in `uv` format following the OpenCV convention, where the direction of uv are "east-down". *Note that this requires us to access PyTorch tensor in `data[..., v, u]`* indexing.
-
-**World Coordinate** - `NED` convention, `+x -> North`, `+y -> East`, `+z -> Down` with the first frame being world origin having identity SE3 pose.
-
-
 ## 🤗 Customization, Extension and Future Developement
 
 > This codebase is designed with *modularization* in mind so it's easy to modify, replace, and re-configure modules of MAC-VO. One can easily use or replase the provided modules like flow estimator, depth estimator, keypoint selector, etc. to create a new visual odometry.
@@ -243,8 +235,37 @@ To test MAC-VO on your custom data format, you use `GeneralStereo` dataloader cl
 
 This dataloader class corresponds to the `Config/Sequence/Example_GeneralStereo.yaml` configuration file, where you can manually set the camera intrinsic and stereo basline etc.
 
+### Coordinate System in this Project
 
-```latex
+**PyTorch Tensor Data** - All images are stored in `BxCxHxW` format following the convention. Batch dimension is always the first dimension of tensor.
+
+**Pixels on Camera Plane** - All pixel coordinates are stored in `uv` format following the OpenCV convention, where the direction of uv are "east-down". *Note that this requires us to access PyTorch tensor in `data[..., v, u]`* indexing.
+
+**World Coordinate** - `NED` convention, `+x -> North`, `+y -> East`, `+z -> Down` with the first frame being world origin having identity SE3 pose.
+
+## ➕ Additional Trajectories Release
+
+Upon [request](https://github.com/MAC-VO/MAC-VO/issues/27) we released the Zed Stereo dataset we collected on the ICRA 2025 conference. You can now download them using the command:
+
+```bash
+pip install minio
+
+python -m Scripts.AdHoc.Download_ICRA25_Zed_Data --dst [Download_Destination]
+```
+
+After download, unzip the trajectories and modify the path in `Config/Sequence/ICRA25_Zed_0250.yaml`. Run MAC-VO (fast mode) with:
+
+```bash
+python MACVO.py --data ./Config/Sequence/ICRA25_Zed_0250.yaml --odom ./Config/Experiment/MACVO/MACVO_Fast.yaml --useRR
+```
+
+> ⚠️ To reproduce the result we show on website and presentation, it is recommended to run the trajectory in its full resolution `980x980`.
+
+## Citation / BibTex
+
+If you find our work useful, please consider cite us with
+
+```bibtex
 @inproceedings{qiu2025mac,
  title={MAC-VO: Metrics-Aware Covariance for Learning-Based Stereo Visual Odometry mac-vo. github. io},
  author={Qiu, Yuheng and Chen, Yutian and Zhang, Zihao and Wang, Wenshan and Scherer, Sebastian},
