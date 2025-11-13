@@ -1,10 +1,10 @@
 args:
   bl: 0.14962844133819508
   camera:
-    cx: 968.639274597168
-    cy: 560.599250793457
-    fx: 565.1982237574123
-    fy: 565.1982237574123
+    cx: 387.4557098388672
+    cy: 224.2397003173828
+    fx: 226.0792895029649
+    fy: 226.0792895029649
   data_config_file: /app/FDCPost/config/test_config.yaml
   format: png
 name: down
