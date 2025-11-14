@@ -129,6 +129,7 @@ class VideoRectificationDataset(Dataset):
         # Create video rectifier
         self.rectifier = VideoRectifier(
             video_path=rectify_cfg.video_path,
+            video_timestamps_path=rectify_cfg.video_timestamps_path,
             kalibr_yaml_path=rectify_cfg.kalibr_yaml_path,
             split_mode=rectify_cfg.split_mode,
             rotation=rectify_cfg.rotation,
