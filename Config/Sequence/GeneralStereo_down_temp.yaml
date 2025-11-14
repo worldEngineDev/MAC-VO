@@ -7,5 +7,6 @@ args:
     fy: 226.0792895029649
   data_config_file: /app/FDCPost/config/test_config.yaml
   format: png
+  result_root: /app/FDCPost/data/2ed0/session_20251106_061007_302604/processed/down
 name: down
 type: GeneralStereo
