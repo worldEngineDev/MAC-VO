@@ -6,14 +6,14 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any, Literal
 import yaml
-from fdc.utils.rectify_video import VideoRectifier, RectificationConfig
+from we_cfg.fdc.rectify_video import VideoRectifier, RectificationConfig
 
 from torch.utils.data import Dataset
 
 from ..Interface import StereoFrame, StereoData
 from ..SequenceBase import SequenceBase
 
-from fdc.common.config import StereoDataConfig, SLAMConfig
+from we_cfg.fdc.config import StereoDataConfig, SLAMConfig
 
 
 class GeneralStereoSequence(SequenceBase[StereoFrame]):
